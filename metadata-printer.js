@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 
 let skulls; // temp
 
-let counter;
+let counter = 1;
 let monsters;
 let potions;
 let keys;
@@ -11,32 +11,32 @@ let customs;
 
 
 async function pickRand() {
-    const x = Math.random()
-    if (x <= 0.05 && potions !== 0) { //potions
-        await writePotion(potions)
-        console.log(`wrote potion #${potions}`);
+    // const x = Math.random()
+    // if (x <= 0.05 && potions !== 0) { //potions
+    //     await writePotion(counter)
+    //     console.log(`wrote potion #${potions}`);
 
-        potions--
-    }
-    else if (x <= 0.95 && x >= 0.05 && monsters !== 0){ // monsters
-        await writeMonster(monsters)
-        console.log(`wrote monster #${monsters}`);
+    //     potions--
+    // }
+    // else if (x <= 0.95 && x >= 0.05 && monsters !== 0){ // monsters
+    //     await writeMonster(counter)
+    //     console.log(`wrote monster #${monsters}`);
 
-        monsters--
-    }
-    else if (keys !== 0) { //keys
-        await writeKey(keys)
+    //     monsters--
+    // }
+    // else if (keys !== 0) { //keys
+    //     await writeKey(counter)
         
-        console.log(`wrote key #${keys}`);
-        keys--
-    } else {
+    //     console.log(`wrote key #${keys}`);
+    //     keys--
+    // } 
         // temp
-        await writeSkull(potions)
-        console.log(`wrote skull #${skulls}`);
-        await copyAndRename(`../Skulls/${skulls}`, skulls, counter)
+        await writeSkull(counter)
+        console.log(`wrote skull #${counter}`);
+        await copyAndRename(`../Skulls/${skulls}.png`, skulls, counter)
         skulls--
         // console.log('out of supply trying again');
-    }
+
     counter++
 }
 
@@ -64,9 +64,13 @@ async function getFolderLengths () {
 
 async function copyAndRename(path, oldId, newId) {
     try {
-        await fs.copyFile(path, './temp');
-        await fs.rename(`./temp/${oldId}.png`, `${newId}.png`)
-        await fs.copyFile(`./temp/${newId}.png`, './results');
+        console.log('m')
+        await fs.copyFile(path, `./temp/${oldId}.png`);
+        console.log('e')
+        await fs.rename(`./temp/${oldId}.png`, `./temp/${newId}.png`)
+        console.log('o')
+        await fs.copyFile(`./temp/${newId}.png`, `./results/${newId}.png`);
+        console.log('w')
         console.log(`${path} was copied, moved and renamed to ` + id);
       } catch (error) {
         console.error('The file could not be copied ', error);
@@ -142,8 +146,9 @@ async function writeMonster(id) { //TODO
 //   writeSkull(1);
 //   readDir('../Skulls');
 
-getFolderLengths().then(() => {
+getFolderLengths().then(async () => {
     for (let i = 1; i <= 100; i++) {
-        pickRand()
+        console.log(i)
+        await pickRand()
     }
 })
