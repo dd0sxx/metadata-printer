@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const {URI} =  require('./config.js');
 
 let skulls; // temp
 
@@ -64,13 +65,9 @@ async function getFolderLengths () {
 
 async function copyAndRename(path, oldId, newId) {
     try {
-        console.log('m')
         await fs.copyFile(path, `./temp/${oldId}.png`);
-        console.log('e')
         await fs.rename(`./temp/${oldId}.png`, `./temp/${newId}.png`)
-        console.log('o')
         await fs.copyFile(`./temp/${newId}.png`, `./results/${newId}.png`);
-        console.log('w')
         console.log(`${path} was copied, moved and renamed to ` + `${newId}.png`);
       } catch (error) {
         console.error('The file could not be copied ', error);
@@ -83,7 +80,7 @@ async function writeSkull(id) {
       const metadata = {
         name: `skull #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${process.env.URI}${id}`,
+        image: `${URI}${id}`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -97,7 +94,7 @@ async function writeMonster(id) { //TODO
       const metadata = {
         name: `skull #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${process.env.URI}${id}`,
+        image: `${URI}${id}`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -111,7 +108,7 @@ async function writeMonster(id) { //TODO
       const metadata = {
         name: `skull #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${process.env.URI}${id}`,
+        image: `${URI}${id}`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -125,7 +122,7 @@ async function writeMonster(id) { //TODO
       const metadata = {
         name: `skull #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${process.env.URI}${id}`,
+        image: `${URI}${id}`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));

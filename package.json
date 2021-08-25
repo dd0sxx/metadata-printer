@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dd0sxx/metadata-printer/issues"
   },
-  "homepage": "https://github.com/dd0sxx/metadata-printer#readme"
+  "homepage": "https://github.com/dd0sxx/metadata-printer#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
 }
