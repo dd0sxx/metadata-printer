@@ -33,7 +33,7 @@ async function pickRand() {
         // temp
         await writeSkull(counter)
         console.log(`wrote skull #${counter}`);
-        await copyAndRename(`../Skulls/${skulls}.png`, skulls, counter)
+        await copyAndRename(`../Skulls/${counter}.png`, counter, counter)
         skulls--
         // console.log('out of supply trying again');
 
@@ -71,7 +71,7 @@ async function copyAndRename(path, oldId, newId) {
         console.log('o')
         await fs.copyFile(`./temp/${newId}.png`, `./results/${newId}.png`);
         console.log('w')
-        console.log(`${path} was copied, moved and renamed to ` + id);
+        console.log(`${path} was copied, moved and renamed to ` + `${newId}.png`);
       } catch (error) {
         console.error('The file could not be copied ', error);
       }
