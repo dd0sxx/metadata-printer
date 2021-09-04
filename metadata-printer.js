@@ -4,7 +4,7 @@ const {URI} =  require('./config.js');
 let skulls; // temp
 
 let counter = 1;
-let monsters;
+let myths;
 let potions;
 let keys;
 let customs;
@@ -19,11 +19,11 @@ async function pickRand() {
 
     //     potions--
     // }
-    // else if (x <= 0.95 && x >= 0.05 && monsters !== 0){ // monsters
-    //     await writeMonster(counter)
-    //     console.log(`wrote monster #${monsters}`);
+    // else if (x <= 0.95 && x >= 0.05 && myths !== 0){ // myths
+    //     await writeMyths(counter)
+    //     console.log(`wrote myths #${myths}`);
 
-    //     monsters--
+    //     myths--
     // }
     // else if (keys !== 0) { //keys
     //     await writeKey(counter)
@@ -54,7 +54,7 @@ async function getFolderLengths () {
     try {
         skulls = await readDir('../Skulls') // temp
 
-        // monsters = await readDir('../Monsters')
+        // myths = await readDir('../Myths')
         // potions = await readDir('../otions')
         // keys = await readDir('../Keys')
         // customs = await readDir('../Customs')
@@ -80,7 +80,7 @@ async function writeSkull(id) {
       const metadata = {
         name: `skull #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${URI}${id}`,
+        image: `${URI}${id}.png`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -89,12 +89,12 @@ async function writeSkull(id) {
     }
   }
 
-async function writeMonster(id) { //TODO
+async function writeMyth(id) { //TODO
     try {
       const metadata = {
-        name: `skull #${id}`,
+        name: `Myth #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${URI}${id}`,
+        image: `${URI}${id}.png`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -106,9 +106,9 @@ async function writeMonster(id) { //TODO
   async function writePotion(id) { //TODO
     try {
       const metadata = {
-        name: `skull #${id}`,
+        name: `Potion #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${URI}${id}`,
+        image: `${URI}${id}.png`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -120,9 +120,9 @@ async function writeMonster(id) { //TODO
   async function writeKey(id) { //TODO
     try {
       const metadata = {
-        name: `skull #${id}`,
+        name: `Key #${id}`,
         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${URI}${id}`,
+        image: `${URI}${id}.png`,
         attributes: [{ type: "Skull" }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
