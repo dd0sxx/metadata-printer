@@ -189,15 +189,15 @@ getFolderLengths().then(async () => {
     await copyAndRename(`../potions/${potions}.png`, counter, counter)
     potions++
     counter++
-    for (let i = 3; i <= 19; i++) {
+    for (let i = 3; i <= 18; i++) {
       //customs
       await writeCustom(counter)
       console.log(`wrote custom #${customs}`);
       await copyAndRename(`../customs/${customs}.png`, counter, counter)
       customs++
-      counter ++
+      counter++
     }
-    for (let j = 20; j <= 300; j++) {
+    for (let j = 19; j <= 300; j++) {
         console.log(j)
         await pickRand()
     }
