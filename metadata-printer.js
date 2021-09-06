@@ -4,38 +4,42 @@ const {URI} =  require('./config.js');
 // let skulls; // temp
 
 let counter = 1;
-let myths;
-let potions;
-let keys;
-let customs;
+let myths = 1;
+let potions = 1;
+let keys = 1;
+let customs = 1;
+let mythsLength;
+let potionsLength;
+let keysLength;
+let customsLength;
 
 
 
 async function pickRand() {
     const x = Math.random()
-    if (x <= 0.05 && potions !== 0) { //potions
+    if (x <= 0.063333 && customs <= customsLength) { //potions 6.3333%
         await writePotion(counter)
         console.log(`wrote potion #${potions}`);
-
-        potions--
+        await copyAndRename(`../potions/${potions}.png`, counter, counter)
+        potions++
     }
-    else if (x <= 0.95 && x >= 0.05 && myths !== 0){ // myths
+    else if (x <= 0.96746 && x > 0.063333 && myths <= mythsLength){ // myths
         await writeMyth(counter)
         console.log(`wrote myths #${myths}`);
-
-        myths--
+        await copyAndRename(`../myths/${myths}.png`, counter, counter)
+        myths++
     }
-    else if (keys !== 0) { //keys
+    else if (keys <= keysLength) { //keys 3.4364%
         await writeKey(counter)
-        
         console.log(`wrote key #${keys}`);
-        keys--
+        await copyAndRename(`../keys/${keys}.png`, counter, counter)
+        keys++
     } 
         // // temp
         // await writeSkull(counter)
         // console.log(`wrote skull #${counter}`);
         // await copyAndRename(`../Skulls/${counter}.png`, counter, counter)
-        // skulls--
+        // skulls++
         // // console.log('out of supply trying again');
 
     counter++
@@ -54,10 +58,10 @@ async function getFolderLengths () {
     try {
         // skulls = await readDir('../Skulls') // temp
 
-        myths = await readDir('../myths')
-        potions = await readDir('../potions')
-        keys = await readDir('../keys')
-        customs = await readDir('../customs')
+        mythsLength = await readDir('../myths')
+        potionsLength = await readDir('../potions')
+        keysLength = await readDir('../keys')
+        customsLength = await readDir('../customs')
     } catch (error) {
         console.error(error)
     }
@@ -95,7 +99,7 @@ async function copyAndRename(path, oldId, newId) {
 async function writeMyth(id) { //TODO
     try {
       const metadata = {
-        name: `Myth #${id}`,
+        name: `Myth #${myths}`,
         description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
         attributes: [{ 
@@ -112,7 +116,7 @@ async function writeMyth(id) { //TODO
   async function writePotion(id) { //TODO
     try {
       const metadata = {
-        name: `Potion #${id}`,
+        name: `Potion #${potions}`,
         description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
         attributes: [{ 
@@ -129,7 +133,7 @@ async function writeMyth(id) { //TODO
   async function writeKey(id) { //TODO
     try {
       const metadata = {
-        name: `Key #${id}`,
+        name: `Key #${keys}`,
         description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
         attributes: [{ 
@@ -146,7 +150,7 @@ async function writeMyth(id) { //TODO
   async function writeCustom(id) { //TODO
     try {
       const metadata = {
-        name: `Custom #${id}`,
+        name: `Custom #${customs}`,
         description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
         attributes: [{ 
@@ -175,15 +179,23 @@ async function writeMyth(id) { //TODO
 getFolderLengths().then(async () => {
   //#1
     await writeMyth(counter)
-    myths--
+    console.log(`wrote myth #${myths}`);
+    await copyAndRename(`../myths/${myths}.png`, counter, counter)
+    myths++
     counter++
-  //#2
-  await writePotion(counter)
-  potions--
-  counter++
-    for (let i = 3; i <= customs; i++) {
+    //#2
+    await writePotion(counter)
+    console.log(`wrote potion #${potions}`);
+    await copyAndRename(`../potions/${potions}.png`, counter, counter)
+    potions++
+    counter++
+    for (let i = 3; i <= 19; i++) {
       //customs
       await writeCustom(counter)
+      console.log(`wrote custom #${customs}`);
+      await copyAndRename(`../customs/${customs}.png`, counter, counter)
+      customs++
+      counter ++
     }
     for (let j = 20; j <= 300; j++) {
         console.log(j)
