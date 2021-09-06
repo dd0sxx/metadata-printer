@@ -26,7 +26,7 @@ async function pickRand() {
     else if (x > 0.063 && x < 0.967 && myths <= mythsLength){ // myths
         await writeMyth(counter)
         console.log(`wrote myths #${myths}`);
-        await copyAndRename(`../myths/${myths}.png`, counter, counter)
+        await copyAndRename(`./scramble/${myths}.png`, counter, counter)
         myths++
     }
     else if (keys <= keysLength) { //keys 3.4364%
@@ -43,7 +43,7 @@ async function pickRand() {
       } else {
         await writeMyth(counter)
         console.log(`wrote myths #${myths}`);
-        await copyAndRename(`../myths/${myths}.png`, counter, counter)
+        await copyAndRename(`./scramble/${myths}.png`, counter, counter)
         myths++
       }
     }
@@ -70,7 +70,7 @@ async function getFolderLengths () {
     try {
         // skulls = await readDir('../Skulls') // temp
 
-        mythsLength = await readDir('../myths')
+        mythsLength = await readDir('./scramble')
         potionsLength = await readDir('../potions')
         keysLength = await readDir('../keys')
         customsLength = await readDir('../customs')
@@ -192,7 +192,7 @@ getFolderLengths().then(async () => {
   //#1
     await writeMyth(counter)
     console.log(`wrote myth #${myths}`);
-    await copyAndRename(`../myths/${myths}.png`, counter, counter)
+    await copyAndRename(`./scramble/${myths}.png`, counter, counter)
     myths++
     counter++
     //#2
