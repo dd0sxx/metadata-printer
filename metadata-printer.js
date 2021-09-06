@@ -17,13 +17,13 @@ let customsLength;
 
 async function pickRand() {
     const x = Math.random()
-    if (x <= 0.1 && potions <= potionsLength) { //potions 6.3333%
+    if (x <= 0.063 && potions <= potionsLength) { //potions 6.3333%
         await writePotion(counter)
         console.log(`wrote potion #${potions}`);
         await copyAndRename(`../potions/${potions}.png`, counter, counter)
         potions++
     }
-    else if (x < 1 && x > 0.92 && myths <= mythsLength){ // myths
+    else if (x > 0.063 && x < 0.967 && myths <= mythsLength){ // myths
         await writeMyth(counter)
         console.log(`wrote myths #${myths}`);
         await copyAndRename(`../myths/${myths}.png`, counter, counter)
