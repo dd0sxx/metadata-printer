@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 let counter = 1;
 let mythsLength;
 
-let pickedNums = {};
+let pickedNums = {0: true};
 
 async function Rename(path, oldId, newId) {
     try {
@@ -34,25 +34,20 @@ const tryRename = async (r, i) => {
 }
 
 l().then(async (res) => {
-    files = await fs.readdir('../myths');
-    console.log(files.length)
-    files1 = await fs.readdir('./scramble');
-    console.log(files1.length)
 
-    // for (let i = 2; i <= 254; i++) {
+    for (let i = 1; i <= 254; i++) {
         
-    //     console.log('hello ', i);
-    //     let r = Math.floor(Math.random() * mythsLength)
-    //     while (pickedNums[r]) {
-    //         console.log('r: ', r);
-    //         r = Math.floor(Math.random() * mythsLength)
-    //     }
-    //     try{
-    //         console.log('trying rename ', r, i)
-    //         await tryRename(r, i)
-    //         pickedNums[r] = true;
-    //     } catch {
-    //         console.error(r, i)
-    //     }
-    // }
+        console.log(i);
+        let r = Math.floor(Math.random() * 255)
+        while (pickedNums[r]) {
+            r = Math.floor(Math.random() * mythsLength)
+        }
+        try{
+            console.log('trying rename ', r, i)
+            await tryRename(r, i)
+            pickedNums[r] = true;
+        } catch {
+            console.error(r, i)
+        }
+    }
 })
