@@ -54,10 +54,10 @@ async function getFolderLengths () {
     try {
         // skulls = await readDir('../Skulls') // temp
 
-        myths = await readDir('../Myths')
-        potions = await readDir('../otions')
-        keys = await readDir('../Keys')
-        customs = await readDir('../Customs')
+        myths = await readDir('../myths')
+        potions = await readDir('../potions')
+        keys = await readDir('../keys')
+        customs = await readDir('../customs')
     } catch (error) {
         console.error(error)
     }
@@ -151,7 +151,7 @@ async function writeMyth(id) { //TODO
         image: `${URI}${id}.png`,
         attributes: [{ 
           "trait_type": "Type", 
-          "value": "Key"
+          "value": "Custom"
         }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
@@ -173,8 +173,19 @@ async function writeMyth(id) { //TODO
 //   readDir('../Skulls');
 
 getFolderLengths().then(async () => {
-    for (let i = 1; i <= 16; i++)
-    for (let j = 1; j <= 100; j++) {
+  //#1
+    await writeMyth(counter)
+    myths--
+    counter++
+  //#2
+  await writePotion(counter)
+  potions--
+  counter++
+    for (let i = 3; i <= customs; i++) {
+      //customs
+      await writeCustom(counter)
+    }
+    for (let j = 20; j <= 300; j++) {
         console.log(j)
         await pickRand()
     }
