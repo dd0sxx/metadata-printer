@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const {URI} =  require('./config.js');
 
-let skulls; // temp
+// let skulls; // temp
 
 let counter = 1;
 let myths;
@@ -12,31 +12,31 @@ let customs;
 
 
 async function pickRand() {
-    // const x = Math.random()
-    // if (x <= 0.05 && potions !== 0) { //potions
-    //     await writePotion(counter)
-    //     console.log(`wrote potion #${potions}`);
+    const x = Math.random()
+    if (x <= 0.05 && potions !== 0) { //potions
+        await writePotion(counter)
+        console.log(`wrote potion #${potions}`);
 
-    //     potions--
-    // }
-    // else if (x <= 0.95 && x >= 0.05 && myths !== 0){ // myths
-    //     await writeMyths(counter)
-    //     console.log(`wrote myths #${myths}`);
+        potions--
+    }
+    else if (x <= 0.95 && x >= 0.05 && myths !== 0){ // myths
+        await writeMyth(counter)
+        console.log(`wrote myths #${myths}`);
 
-    //     myths--
-    // }
-    // else if (keys !== 0) { //keys
-    //     await writeKey(counter)
+        myths--
+    }
+    else if (keys !== 0) { //keys
+        await writeKey(counter)
         
-    //     console.log(`wrote key #${keys}`);
-    //     keys--
-    // } 
-        // temp
-        await writeSkull(counter)
-        console.log(`wrote skull #${counter}`);
-        await copyAndRename(`../Skulls/${counter}.png`, counter, counter)
-        skulls--
-        // console.log('out of supply trying again');
+        console.log(`wrote key #${keys}`);
+        keys--
+    } 
+        // // temp
+        // await writeSkull(counter)
+        // console.log(`wrote skull #${counter}`);
+        // await copyAndRename(`../Skulls/${counter}.png`, counter, counter)
+        // skulls--
+        // // console.log('out of supply trying again');
 
     counter++
 }
@@ -52,12 +52,12 @@ async function readDir(path) {
 
 async function getFolderLengths () {
     try {
-        skulls = await readDir('../Skulls') // temp
+        // skulls = await readDir('../Skulls') // temp
 
-        // myths = await readDir('../Myths')
-        // potions = await readDir('../otions')
-        // keys = await readDir('../Keys')
-        // customs = await readDir('../Customs')
+        myths = await readDir('../Myths')
+        potions = await readDir('../otions')
+        keys = await readDir('../Keys')
+        customs = await readDir('../Customs')
     } catch (error) {
         console.error(error)
     }
@@ -75,27 +75,33 @@ async function copyAndRename(path, oldId, newId) {
 }
 
 
-async function writeSkull(id) {
-    try {
-      const metadata = {
-        name: `skull #${id}`,
-        description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
-        image: `${URI}${id}.png`,
-        attributes: [{ type: "Skull" }] 
-      }
-      await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
-    } catch (error) {
-      console.error(`Got an error trying to write to a file: ${error.message}`);
-    }
-  }
+// async function writeSkull(id) {
+//     try {
+//       const metadata = {
+//         name: `skull #${id}`,
+//         description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
+//         image: `${URI}${id}.png`,
+//         attributes: [{ 
+//           "trait_type": "Type", 
+//           "value": "Skull"
+//         }]
+//       }
+//       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
+//     } catch (error) {
+//       console.error(`Got an error trying to write to a file: ${error.message}`);
+//     }
+//   }
 
 async function writeMyth(id) { //TODO
     try {
       const metadata = {
         name: `Myth #${id}`,
-        description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
+        description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
-        attributes: [{ type: "Skull" }] 
+        attributes: [{ 
+          "trait_type": "Type", 
+          "value": "Myth"
+        }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
     } catch (error) {
@@ -107,9 +113,12 @@ async function writeMyth(id) { //TODO
     try {
       const metadata = {
         name: `Potion #${id}`,
-        description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
+        description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
-        attributes: [{ type: "Skull" }] 
+        attributes: [{ 
+          "trait_type": "Type", 
+          "value": "Potion"
+        }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
     } catch (error) {
@@ -121,9 +130,29 @@ async function writeMyth(id) { //TODO
     try {
       const metadata = {
         name: `Key #${id}`,
-        description: `${id}/100 \n There will only be 100 Oilys Skulls.`,
+        description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
         image: `${URI}${id}.png`,
-        attributes: [{ type: "Skull" }] 
+        attributes: [{ 
+          "trait_type": "Type", 
+          "value": "Key"
+        }] 
+      }
+      await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
+    } catch (error) {
+      console.error(`Got an error trying to write to a file: ${error.message}`);
+    }
+  }
+  
+  async function writeCustom(id) { //TODO
+    try {
+      const metadata = {
+        name: `Custom #${id}`,
+        description: `Oilys is 1/1 hand drawn collection by Logan Larkin.`,
+        image: `${URI}${id}.png`,
+        attributes: [{ 
+          "trait_type": "Type", 
+          "value": "Key"
+        }] 
       }
       await fs.writeFile(`../oilys-json/${id}.json`, JSON.stringify(metadata));
     } catch (error) {
@@ -144,8 +173,9 @@ async function writeMyth(id) { //TODO
 //   readDir('../Skulls');
 
 getFolderLengths().then(async () => {
-    for (let i = 1; i <= 100; i++) {
-        console.log(i)
+    for (let i = 1; i <= 16; i++)
+    for (let j = 1; j <= 100; j++) {
+        console.log(j)
         await pickRand()
     }
 })
